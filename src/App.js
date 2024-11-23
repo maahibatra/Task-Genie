@@ -36,13 +36,19 @@ const App = () => {
             task.id === taskId ? { ...task, title: newTitle } : task
         );
         setTasks(updatedTasks);
-    };    
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Save to localStorage
+    };
 
     return (
         <div className="app">
             <div className='header'>Task Genie</div>
             <AddTaskForm addTask={addTask} />
-            <TaskList tasks={tasks} deleteTask={deleteTask} toggleComplete={toggleComplete} />
+            <TaskList 
+                tasks={tasks} 
+                deleteTask={deleteTask} 
+                toggleComplete={toggleComplete} 
+                updateTaskTitle={updateTaskTitle} // Pass updateTaskTitle to TaskList
+            />
         </div>
     );
 };

@@ -22,12 +22,13 @@ const TaskItem = ({ task, deleteTask, toggleComplete, updateTaskTitle }) => {
                     onChange={(e) => setEditedTitle(e.target.value)} 
                     onClick={(e) => e.stopPropagation()}
                     className="editInput"
+                    maxLength={25}
                 />
             ) : (
                 <span className="taskTitle">{task.title}</span>
             )}
 
-            <div className="buttonContainer" style={{ display: 'flex', gap: '10px' }}>
+            <div className="buttonContainer">
                 {isEditing ? (
                     <button 
                         onClick={(e) => {

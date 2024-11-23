@@ -26,6 +26,7 @@ const AddTaskForm = ({ addTask }) => {
                 placeholder="Task..."
                 required
                 className='taskAdd'
+                maxLength={25}
             />
             <button type="submit" className='addButton'>Add+</button>
         </form>
