@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import nlp from 'compromise';
 
-const AddTaskForm = ({ addTask }) => {
+const AddTaskForm = ({ addTask, handleAIClick }) => {
     const [taskTitle, setTaskTitle] = useState('');
 
     const handleSubmit = (e) => {
@@ -18,18 +19,21 @@ const AddTaskForm = ({ addTask }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input 
-                type="text" 
-                value={taskTitle} 
-                onChange={(e) => setTaskTitle(e.target.value)} 
-                placeholder="Task..."
-                required
-                className='taskAdd'
-                maxLength={25}
-            />
-            <button type="submit" className='addButton'>Add+</button>
-        </form>
+        <div className="form-container">
+            <form onSubmit={handleSubmit}>
+                <input 
+                    type="text" 
+                    value={taskTitle} 
+                    onChange={(e) => setTaskTitle(e.target.value)} 
+                    placeholder="Task..."
+                    required
+                    className='taskAdd'
+                    maxLength={25}
+                />
+                <button type="submit" className='addButton'>Add+</button>
+            </form>
+            <button onClick={handleAIClick} className="aiButton">✨</button>
+        </div>
     );
 };
 
