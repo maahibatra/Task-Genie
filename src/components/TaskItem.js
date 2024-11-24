@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TaskItem = ({ task, deleteTask, toggleComplete, updateTaskTitle }) => {
+const TaskItem = ({ task, deleteTask, toggleComplete, updateTaskTitle, isPreview }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedTitle, setEditedTitle] = useState(task.title);
 
@@ -12,10 +12,10 @@ const TaskItem = ({ task, deleteTask, toggleComplete, updateTaskTitle }) => {
     return (
         <div 
             className={`taskItem ${task.completed ? 'completed' : ''}`} 
-            onClick={() => toggleComplete(task.id)}
+            onClick={!isPreview ? () => toggleComplete(task.id) : undefined}
             style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
         >
-            {isEditing ? (
+            {isEditing && !isPreview ? (
                 <input 
                     type="text" 
                     value={editedTitle} 
@@ -28,39 +28,41 @@ const TaskItem = ({ task, deleteTask, toggleComplete, updateTaskTitle }) => {
                 <span className="taskTitle">{task.title}</span>
             )}
 
-            <div className="buttonContainer">
-                {isEditing ? (
-                    <button 
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            saveEdit();
-                        }} 
-                        className="saveButton"
-                    >
-                        Save
-                    </button>
-                ) : (
-                    <button 
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setIsEditing(true);
-                        }} 
-                        className="editButton"
-                    >
-                        Edit
-                    </button>
-                )}
+            {!isPreview && (
+                <div className="buttonContainer">
+                    {isEditing ? (
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                saveEdit();
+                            }} 
+                            className="saveButton"
+                        >
+                            Save
+                        </button>
+                    ) : (
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsEditing(true);
+                            }} 
+                            className="editButton"
+                        >
+                            Edit
+                        </button>
+                    )}
 
-                <button 
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        deleteTask(task.id);
-                    }} 
-                    className="deleteButton"
-                >
-                    Delete
-                </button>
-            </div>
+                    <button 
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            deleteTask(task.id);
+                        }} 
+                        className="deleteButton"
+                    >
+                        Delete
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

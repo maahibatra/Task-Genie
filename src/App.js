@@ -3,14 +3,26 @@ import axios from 'axios';
 import './App.css';
 import TaskList from './components/TaskList';
 import AddTaskForm from './components/AddTaskForm';
+import TaskItem from './components/TaskItem'; // Import TaskItem
 
 const App = () => {
     const [tasks, setTasks] = useState([]);
     const [showAIPrompt, setShowAIPrompt] = useState(false);
     const [aiResponse, setAiResponse] = useState('');
     const [aiGeneratedTasks, setAiGeneratedTasks] = useState([]);
+    const [taskTitle, setTaskTitle] = useState(''); // Define taskTitle here
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => {
+                setError('');
+            }, 2500);
+
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
 
     useEffect(() => {
         const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -38,7 +50,7 @@ const App = () => {
     };
 
     const updateTaskTitle = (taskId, newTitle) => {
-        const updatedTasks = tasks.map(task => 
+        const updatedTasks = tasks.map(task =>
             task.id === taskId ? { ...task, title: newTitle } : task
         );
         setTasks(updatedTasks);
@@ -50,6 +62,11 @@ const App = () => {
     };
 
     const handleAISubmit = async () => {
+        if (!aiResponse.trim()) {
+            setError('Please enter a description for the tasks.');
+            return;
+        }
+
         setLoading(true);
         setError('');
         try {
@@ -86,7 +103,7 @@ const App = () => {
             setLoading(false);
         }
     };
-    
+
     const handleSaveAIGeneratedTasks = () => {
         setTasks((prevTasks) => {
             const updatedTasks = [...prevTasks, ...aiGeneratedTasks];
@@ -95,11 +112,37 @@ const App = () => {
         });
 
         setAiGeneratedTasks([]);
+        // Close the AI prompt modal and clear the response
+        setShowAIPrompt(false);
+        setAiResponse('');
+    };
+
+    const handleCancelAIPrompt = () => {
+        setAiGeneratedTasks([]);
+        setShowAIPrompt(false);
+        setAiResponse('');
+    };
+
+    // Function to add tasks directly to the preview modal list (aiGeneratedTasks)
+    const handleAddTaskToPreviewModal = () => {
+        if (!taskTitle.trim()) return;
+
+        const newTask = {
+            id: Date.now(),
+            title: taskTitle,
+            completed: false,
+        };
+        
+        setAiGeneratedTasks((prevTasks) => [...prevTasks, newTask]);
+        setTaskTitle('');
     };
 
     return (
         <div className="app">
-            <div className="header">Task Genie</div>
+            <div className="header">
+                Task Genie
+                <span className='subHeader'>(Beta)</span>
+            </div>
             <AddTaskForm addTask={addTask} handleAIClick={handleAIClick} />
             <TaskList 
                 tasks={tasks} 
@@ -120,20 +163,38 @@ const App = () => {
                     <button onClick={handleAISubmit} disabled={loading} className='modalButton'>
                         {loading ? 'Loading...' : 'Send'}
                     </button>
-                    <button onClick={() => setShowAIPrompt(false)} className='modalButton'>Cancel</button>
+                    <button onClick={handleCancelAIPrompt} className='modalButton'>Cancel</button>
                 </div>
             )}
 
             {aiGeneratedTasks.length > 0 && (
                 <div className="previewModal">
                     <div className='modalHeader'>Generated Task List</div>
-                    <ul>
+                    <input
+                        type="text"
+                        value={taskTitle}
+                        onChange={(e) => setTaskTitle(e.target.value)}
+                        placeholder="New task..."
+                        className="taskAdd"
+                    />
+                    <button onClick={handleAddTaskToPreviewModal} className='modalButton'>Add</button>
+                    <div className="taskList">
                         {aiGeneratedTasks.map((task) => (
-                            <li key={task.id}>{task.title}</li>
+                            <TaskItem 
+                                key={task.id} 
+                                task={task} 
+                                deleteTask={(taskId) => setAiGeneratedTasks(aiGeneratedTasks.filter(task => task.id !== taskId))} 
+                                updateTaskTitle={(taskId, newTitle) => {
+                                    setAiGeneratedTasks(aiGeneratedTasks.map(task => 
+                                        task.id === taskId ? { ...task, title: newTitle } : task
+                                    ));
+                                }} 
+                                toggleComplete={toggleComplete}
+                            />
                         ))}
-                    </ul>
+                    </div>
                     <button onClick={handleSaveAIGeneratedTasks} className='modalButton'>Save to Tasks</button>
-                    <button onClick={() => setAiGeneratedTasks([])} className='modalButton'>Cancel</button>
+                    <button onClick={handleCancelAIPrompt} className='modalButton'>Cancel</button>
                 </div>
             )}
 
