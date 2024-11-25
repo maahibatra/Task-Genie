@@ -32,21 +32,31 @@ Task Genie is an AI-powered to-do list app that can take your rants and make it 
 - Copy and save it somewhere (you won't find it again!).
 
 ### Clone the repository:
-    git clone https://github.com/your-username/task-genie.git
-    cd task-genie
+```bash
+git clone https://github.com/your-username/task-genie.git
+cd task-genie
+```
 
 ### Backend:
 - Navigate to the /backend directory:
-    cd backend
+```bash
+cd backend
+```
 - Create a .env file in the /backend folder and add your Hugging Face API key:
-    hfKey=your_hugging_face_api_key
+```bash
+hfKey=your_hugging_face_api_key
+```
 - Start the backend server:
-    npm run dev
+```bash
+npm run dev
+```
 - The server will run on http://localhost:5000.
 
 ### Frontend:
 - Start the frontend React app:
-    npm start
+```bash
+npm start
+```
 - The app will be available at a localhost specified in the terminal.
 
 ## HAVE FUN!!!!
