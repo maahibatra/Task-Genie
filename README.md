@@ -19,7 +19,7 @@ Task Genie is an AI-powered to-do list app that can take your rants and make it 
 
 ## NOTE
 - I am so very sorry that this project isn't easy to demo or run yourself - I tried to put it onto vercel but it just ruined everything so I am keeping it local-based till I have the courage to fight it.
-- If you want to see a video demo, here's a link: (add link later)
+- If you want to see a video demo, here's a link: [Click Here To Watch](https://youtu.be/eBKWCg08Bh0)
 
 ## Prerequisites
 - Node.js (>= v16.0.0)
@@ -57,6 +57,6 @@ npm run dev
 ```bash
 npm start
 ```
-- The app will be available at a localhost specified in the terminal.
+- The app will be available at a http://localhost:3000.
 
 ## HAVE FUN!!!!
