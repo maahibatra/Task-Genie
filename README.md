@@ -36,17 +36,17 @@ Task Genie is an AI-powered to-do list app that can take your rants and make it 
     cd task-genie
 
 ### Backend:
-    - Navigate to the /backend directory:
-        cd backend
-    - Create a .env file in the /backend folder and add your Hugging Face API key:
-        hfKey=your_hugging_face_api_key
-    - Start the backend server:
-        npm run dev
-    - The server will run on http://localhost:5000.
+- Navigate to the /backend directory:
+    cd backend
+- Create a .env file in the /backend folder and add your Hugging Face API key:
+    hfKey=your_hugging_face_api_key
+- Start the backend server:
+    npm run dev
+- The server will run on http://localhost:5000.
 
 ### Frontend:
-    - Start the frontend React app:
-        npm start
-    - The app will be available at a localhost specified in the terminal.
+- Start the frontend React app:
+    npm start
+- The app will be available at a localhost specified in the terminal.
 
 ## HAVE FUN!!!!
