@@ -49,3 +49,5 @@ Task Genie is an AI-powered to-do list app that can take your rants and make it 
     - Start the frontend React app:
         npm start
     - The app will be available at a localhost specified in the terminal.
+
+## HAVE FUN!!!!
