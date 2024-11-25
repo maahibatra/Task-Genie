@@ -3,14 +3,14 @@ import axios from 'axios';
 import './App.css';
 import TaskList from './components/TaskList';
 import AddTaskForm from './components/AddTaskForm';
-import TaskItem from './components/TaskItem'; // Import TaskItem
+import TaskItem from './components/TaskItem';
 
 const App = () => {
     const [tasks, setTasks] = useState([]);
     const [showAIPrompt, setShowAIPrompt] = useState(false);
     const [aiResponse, setAiResponse] = useState('');
     const [aiGeneratedTasks, setAiGeneratedTasks] = useState([]);
-    const [taskTitle, setTaskTitle] = useState(''); // Define taskTitle here
+    const [taskTitle, setTaskTitle] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -112,7 +112,6 @@ const App = () => {
         });
 
         setAiGeneratedTasks([]);
-        // Close the AI prompt modal and clear the response
         setShowAIPrompt(false);
         setAiResponse('');
     };
@@ -123,7 +122,6 @@ const App = () => {
         setAiResponse('');
     };
 
-    // Function to add tasks directly to the preview modal list (aiGeneratedTasks)
     const handleAddTaskToPreviewModal = () => {
         if (!taskTitle.trim()) return;
 
