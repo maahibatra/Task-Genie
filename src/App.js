@@ -10,7 +10,7 @@ const App = () => {
     const [showAIPrompt, setShowAIPrompt] = useState(false);
     const [aiResponse, setAiResponse] = useState('');
     const [aiGeneratedTasks, setAiGeneratedTasks] = useState([]);
-    const [taskTitle, setTaskTitle] = useState(''); // Define taskTitle here
+    const [taskTitle, setTaskTitle] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -72,7 +72,10 @@ const App = () => {
         try {
             const refinedPrompt = `Generate a task list for the following items: ${aiResponse}. Please output only the tasks, one per line, without any additional commentary or suggestions.`;
 
-            const response = await axios.post('http://localhost:5000/api/generate-tasks', { prompt: refinedPrompt });
+            const response = await axios.post(
+                '/api/generate-tasks', // This will be routed to the Vercel serverless function
+                { prompt: refinedPrompt }
+              );              
             console.log(response.data);
             if (response.data && Array.isArray(response.data) && response.data.length > 0) {
                 const rawText = response.data[0].generated_text;
@@ -112,7 +115,6 @@ const App = () => {
         });
 
         setAiGeneratedTasks([]);
-        // Close the AI prompt modal and clear the response
         setShowAIPrompt(false);
         setAiResponse('');
     };
@@ -123,7 +125,6 @@ const App = () => {
         setAiResponse('');
     };
 
-    // Function to add tasks directly to the preview modal list (aiGeneratedTasks)
     const handleAddTaskToPreviewModal = () => {
         if (!taskTitle.trim()) return;
 
