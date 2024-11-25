@@ -26,16 +26,16 @@ Task Genie is an AI-powered to-do list app that can take your rants and make it 
 - npm
 - A Hugging Face account
 
-- **Hugging Face**:
+### Hugging Face:
 - On Hugging Face, go to Access Tokens.
 - Create a new access token with read permissions.
 - Copy and save it somewhere (you won't find it again!).
 
-- **Clone the repository**:
+### Clone the repository:
     git clone https://github.com/your-username/task-genie.git
     cd task-genie
 
-- **Backend**:
+### Backend:
     - Navigate to the /backend directory:
         cd backend
     - Create a .env file in the /backend folder and add your Hugging Face API key:
@@ -44,7 +44,7 @@ Task Genie is an AI-powered to-do list app that can take your rants and make it 
         npm run dev
     - The server will run on http://localhost:5000.
 
-- **Frontend**:
+### Frontend:
     - Start the frontend React app:
         npm start
     - The app will be available at a localhost specified in the terminal.
