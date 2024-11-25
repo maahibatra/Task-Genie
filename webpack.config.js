@@ -12,6 +12,12 @@ module.exports = {
             template: path.join(__dirname, "public", "index.html"),
         }),
     ],
+    devServer : {
+        static: {
+            directory: path.join(__dirname, "build"),
+        },
+        port: 3000,
+    },
     module: {
         rules: [
             {
@@ -24,8 +30,8 @@ module.exports = {
                 use: ["style-loader", "css-loader"],
             },
         ],
-    },
+    },      
     resolve: {
-        extensions: [".js", ".jsx"],
+        extensions: ["*", ".js", ".jsx"],
     },
 };
