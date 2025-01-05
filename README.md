@@ -17,6 +17,12 @@ Task Genie is an AI-powered to-do list app that can take your rants and make it 
 - On clicking save, it will save the generated tasks to the main task list.
 - To toggle a task, simply click on it (not on the buttons). Edit and deletion is also possible through the buttons on the right.
 
+# Usage of AI - AI has been used in the creation of this project, specifically ChatGPT.
+- AI has been used for the debugging of most ReactJS errors.
+- AI has been used in help for implementation of HuggingFace AI.
+- AI has been used in how to split the AI generated tasks into a list.
+- AI has been used in implementing a preview modal for the AI generated tasks.
+
 ## NOTE
 - I am so very sorry that this project isn't easy to demo or run yourself - I tried to put it onto vercel but it just ruined everything so I am keeping it local-based till I have the courage to fight it.
 - If you want to see a video demo, here's a link: [Click Here To Watch](https://youtu.be/eBKWCg08Bh0)
